@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
+import 'package:teste2/widgets/input.widget.dart';
 import 'package:teste2/widgets/logo.widget.dart';
 
 void main() {
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
 
 class Homepage extends StatelessWidget {
   var _gasCtrl = new MoneyMaskedTextController();
+  var _alcCtrl = new MoneyMaskedTextController();
 
   @override
   Widget build(BuildContext context) {
@@ -30,37 +32,25 @@ class Homepage extends StatelessWidget {
       body: ListView(
         children: [
           Logo(),
-          Row(
-            children: [
-              Container(
-                width: 150,
-                alignment: Alignment.centerRight,
-                child: Text(
-                  "Gasolina",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 35,
-                    fontFamily: "BigShouldersDisplay-Light.ttf",
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 20,
-              ),
-              Expanded(
-                  child: TextFormField(
-                controller: _gasCtrl,
-                keyboardType: TextInputType.number,
+          Input(label: "Gasolina", ctrl: _gasCtrl),
+          Input(label: "Alcool", ctrl: _alcCtrl),
+          Container(
+            margin: EdgeInsets.all(30),
+            height: 60,
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.8),
+              borderRadius: BorderRadius.circular(60),
+            ),
+            child: FloatingActionButton(
+              child: Text(
+                "Calcular",
                 style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 45,
-                  fontFamily: "BigShouldersDisplay-Light.ttf",
-                ),
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                ),
-              ))
-            ],
+                    color: Theme.of(context).primaryColor,
+                    fontSize: 25,
+                    fontFamily: "BigShouldersDisplay-Light.ttf"),
+              ),
+              onPressed: () {},
+            ),
           )
         ],
       ),
