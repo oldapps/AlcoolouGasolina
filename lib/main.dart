@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:teste2/widgets/input.widget.dart';
+import 'package:teste2/widgets/loading-button.widget.dart';
 import 'package:teste2/widgets/logo.widget.dart';
 
 void main() {
@@ -32,25 +33,49 @@ class Homepage extends StatelessWidget {
       body: ListView(
         children: [
           Logo(),
-          Input(label: "Gasolina", ctrl: _gasCtrl),
-          Input(label: "Alcool", ctrl: _alcCtrl),
           Container(
             margin: EdgeInsets.all(30),
-            height: 60,
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.8),
-              borderRadius: BorderRadius.circular(60),
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(25),
             ),
-            child: FloatingActionButton(
-              child: Text(
-                "Calcular",
-                style: TextStyle(
-                    color: Theme.of(context).primaryColor,
-                    fontSize: 25,
-                    fontFamily: "BigShouldersDisplay-Light.ttf"),
-              ),
-              onPressed: () {},
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 30,
+                ),
+                Text(
+                  "Compensa utilizar álcool",
+                  style: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                      fontSize: 25,
+                      fontFamily: "BigShouldersDisplay-Light.ttf"),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                LoadingButton(
+                  busy: false,
+                  func: () {},
+                  invert: true,
+                  text: "Calcular novamente",
+                  corDaBorda: "",
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+              ],
             ),
+          ),
+          Input(label: "Gasolina", ctrl: _gasCtrl),
+          Input(label: "Alcool", ctrl: _alcCtrl),
+          LoadingButton(
+            busy: false,
+            func: () {},
+            invert: false,
+            text: "Calcular",
+            corDaBorda: "",
           )
         ],
       ),
