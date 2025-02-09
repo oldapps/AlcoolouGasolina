@@ -41,7 +41,9 @@ class LoadingButton extends StatelessWidget {
             child: FloatingActionButton(
               backgroundColor:
                   invert ? Theme.of(context).primaryColor : Colors.white,
-              onPressed: func(),
+              onPressed: () async {
+                await func(); // Agora o botão aguarda a execução da função assíncrona
+              },
               child: Text(
                 text,
                 style: TextStyle(
