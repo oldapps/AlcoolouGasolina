@@ -11,6 +11,7 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+  Color _color = Colors.deepPurple;
   var _gasCtrl = MoneyMaskedTextController();
   var _alcCtrl = MoneyMaskedTextController();
 
@@ -23,23 +24,28 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
-      body: ListView(
-        children: [
-          Logo(),
-          _completed
-              ? Success(
-                  result: _resultText,
-                  reset: reset,
-                )
-              : SubmitForm(
-                  gasCtrl: _gasCtrl,
-                  alcCtrl: _alcCtrl,
-                  submitFunc: calculate,
-                  busy: _busy)
-        ],
-      ),
-    );
+        backgroundColor: Theme.of(context).primaryColor,
+        body: AnimatedContainer(
+          duration: Duration(
+            milliseconds: 1200,
+          ),
+          color: _color,
+          child: ListView(
+            children: [
+              Logo(),
+              _completed
+                  ? Success(
+                      result: _resultText,
+                      reset: reset,
+                    )
+                  : SubmitForm(
+                      gasCtrl: _gasCtrl,
+                      alcCtrl: _alcCtrl,
+                      submitFunc: calculate,
+                      busy: _busy)
+            ],
+          ),
+        ));
   }
 
   Future<void> calculate() async {
@@ -52,6 +58,7 @@ class _HomepageState extends State<Homepage> {
     // Adia o setState sem envolver um Future
     WidgetsBinding.instance.addPostFrameCallback((_) {
       setState(() {
+        _color = Colors.deepPurpleAccent;
         _completed = false;
         _busy = true;
       });
@@ -73,6 +80,7 @@ class _HomepageState extends State<Homepage> {
 
   reset() {
     setState(() {
+      _color = Colors.deepPurple;
       _gasCtrl = MoneyMaskedTextController();
       _alcCtrl = MoneyMaskedTextController();
       _completed = false;
